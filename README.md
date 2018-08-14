@@ -46,7 +46,7 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 {
     "<Folder Name>": {
       "file_cats": ["<Existing Folder Name in file_types.json>","..."],
-      "min_size": " type:int  <Minimum File Size (Matches all files >= min_size)>"
+      "min_size": " type:int in MegaBytes:  <Minimum File Size (Matches all files >= min_size)>"
     }
 }
 ```
