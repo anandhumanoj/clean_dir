@@ -29,14 +29,6 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 
 #  Config Files
 
-#####  file_types.json Sample format
-#####  _
-```json
-{
-    "<Folder Name>": "<File Type as comma seperated list>"
-    "Example" : ".type1,type2,tyep3"
-}
-```
 
 #####  file_types.json Sample format
 #####  _
