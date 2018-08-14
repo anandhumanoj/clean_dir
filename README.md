@@ -42,7 +42,7 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 #####  _
 ```json
 {
-    "<Folder Name>": "<File Type as comma seperated list>"
+    "<Folder Name>": "<File Type as comma seperated list>",
     "Example" : ".type1,type2,tyep3"
 }
 ```
@@ -53,8 +53,8 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 ```json
 {
     "<Folder Name>": {
-      "file_cats": ["<Existing Folder Name in file_types.json>",...],
-      "min_size": type:int "<Minimum File Size (Matches all files >= min_size)>"
+      "file_cats": ["<Existing Folder Name in file_types.json>","..."],
+      "min_size": " type:int  <Minimum File Size (Matches all files >= min_size)>"
     }
 }
 ```
