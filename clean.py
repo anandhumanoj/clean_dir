@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import os
 import re
 import shutil
@@ -50,34 +50,35 @@ def find_files(file_item, dir_path):
     """
     file_path = dir_path + "/" + file_item
     #  To find files with file_sizes constraint
-    for category, types in file_sizes.items():
-        for file_cat in types['file_cats']:
-            match = file_types[file_cat]
-            min_file_size = (types['min_size']) * 1024 * 1024  # Convert file_size:MiB => bytes
-            if re.match(match, file_item) and os.path.getsize(file_path) >= min_file_size:
+    try:
+        for category, types in file_sizes.items():
+            for file_cat in types['file_cats']:
+
+                match = file_types[file_cat]
+                min_file_size = (types['min_size']) * 1024 * 1024  # Convert file_size:MiB => bytes
+                if re.match(match, file_item) and os.path.getsize(file_path) >= min_file_size:
+                    if category not in result.keys():
+                        result[category] = []
+                    result[category].append(file_item)
+                    move_files(category, file_item, dir_path)
+                    return
+        #  To find files with file_types constraint
+        for category, match in file_types.items():
+            if re.match(match, file_item):
                 if category not in result.keys():
                     result[category] = []
                 result[category].append(file_item)
-                try:
-                    move_files(category, file_item, dir_path)
-                    return
-                except Exception as Err:
-                    print("Error While moving files")
-                    print(Err)
-                    exit(1)
-    #  To find files with file_types constraint
-    for category, match in file_types.items():
-        if re.match(match, file_item):
-            if category not in result.keys():
-                result[category] = []
-            result[category].append(file_item)
-            try:
                 move_files(category, file_item, dir_path)
                 return
-            except Exception as Err:
-                print("Error While moving files")
-                print(Err)
-                exit(1)
+    except (OSError, IOError) as Err:
+        print("Error While moving files")
+        print(Err)
+        exit(1)
+    except KeyError as key_error:
+        print("Invalid Key in json_sizes.json")
+        print(key_error)
+        exit(1)
+
 
 
 def move_files(category, file_name, dir_name):
