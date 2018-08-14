@@ -27,4 +27,35 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 -   -v , --verbose 
                         Show files scanned
 
+#  Config Files
+
+#####  file_types.json Sample format
+#####  _
+```json
+{
+    "<Folder Name>": "<File Type as comma seperated list>"
+    "Example" : ".type1,type2,tyep3"
+}
+```
+
+#####  file_types.json Sample format
+#####  _
+```json
+{
+    "<Folder Name>": "<File Type as comma seperated list>"
+    "Example" : ".type1,type2,tyep3"
+}
+```
+
+
+#####  file_sizes.json Sample format
+#####  _
+```json
+{
+    "<Folder Name>": {
+      "file_cats": ["<Existing Folder Name in file_types.json>",...],
+      "min_size": type:int "<Minimum File Size (Matches all files >= min_size)>"
+    }
+}
+```
 
