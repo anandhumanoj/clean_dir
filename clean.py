@@ -75,10 +75,9 @@ def find_files(file_item, dir_path):
         print(Err)
         exit(1)
     except KeyError as key_error:
-        print("Invalid Key in json_sizes.json")
+        print("Invalid Keys in Configuration file")
         print(key_error)
         exit(1)
-
 
 
 def move_files(category, file_name, dir_name):
@@ -100,21 +99,26 @@ def move_files(category, file_name, dir_name):
         shutil.move(full_file_path, curr_file_destination)
 
 
-def parse_file_types():
+def parse_file_types(config_file):
     def convert_to_regexp(y):
         return "(.*" + re.escape(y) + "$)"
 
-    host_dir = os.path.abspath(os.path.dirname(__file__))
     try:
 
-        with open(host_dir + "/file_types.json", "r") as f_types:
-            globals()['file_types_un_formatted'] = json.load(f_types)
+        with open(config_file, "r") as f_types:
+            config_data = json.load(f_types)
+            if "Categories" in config_data.keys():
+                globals()['file_types_un_formatted'] = config_data['Categories']
+            else:
+                raise ValueError()
 
-        with open(host_dir + "/file_sizes.json", "r") as f_sizes:
-            globals()['file_sizes'] = json.load(f_sizes)
+            if "Sizes" in config_data.keys():
+                globals()['file_sizes'] = config_data['Sizes']
+            else:
+                raise ValueError()
 
     except ValueError:
-        print("Invalid data file(s). Exiting...")
+        print("Invalid data file. Exiting...")
         exit(1)
     except (OSError, IOError) as Err:
 
@@ -129,17 +133,28 @@ def parse_file_types():
             file_types[category] = str_regexp.strip('|')
 
 
-def main():
-    parse_file_types()
+def arg_parse():
     parser = argparse.ArgumentParser("A simple program to clean up your download directory")
     parser.add_argument("--dir", nargs="?", default="", const="", help="Directory to run against")
+    parser.add_argument("--config", nargs="?", default="", const="",
+                        help="JSON file in predefined format to sort files by its extension")
+
     parser.add_argument("-r", "--recursive", type=bool, nargs="?", const=True, help="Recursively Scan sub directories",
                         default=False)
     parser.add_argument("-d", "--default", type=bool, nargs="?", const=True,
                         help="Work with default folder (~/Downloads folder)",
                         default=False)
     parser.add_argument("-v", '--verbose', type=bool, nargs="?", default=False, const=True, help="Show files scanned")
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main():
+    args = arg_parse()
+    host_dir = os.path.abspath(os.path.dirname(__file__))
+    config_file = host_dir + "/config.json"
+    if args.config != "":
+        config_file = args.config
+    parse_file_types(config_file)
     if args.dir != "" and os.path.isdir(args.dir):
         globals()['base_dir'] = args.dir
     elif args.default:
