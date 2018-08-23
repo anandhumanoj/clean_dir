@@ -14,7 +14,6 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 # Platforms
 
 - Linux
-- Mac(Not tested)
 - Windows(Not tested)
 # Options 
 - --dir [DIR]           Directory to run against
@@ -30,23 +29,18 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 #  Config Files
 
 
-#####  file_types.json Sample format
-#####  _
+#####  Sample format for configuration file --config
 ```json
 {
-    "<Folder Name>": "<File Type as comma seperated list>",
-    "Example" : ".type1,type2,tyep3"
-}
-```
-
-
-#####  file_sizes.json Sample format
-#####  _
-```json
-{
-    "<Folder Name>": {
-      "file_cats": ["<Existing Folder Name in file_types.json>","..."],
-      "min_size": " type:int in MegaBytes:  <Minimum File Size (Matches all files >= min_size)>"
+    "Categories":{
+        "<Folder Name>": "<File Type as comma seperated list>",
+        "Example" : ".type1,type2,tyep3"
+    },
+    "Sizes":{
+        "<Folder Name>": {
+            "file_cats": ["<Existing Folder Name in file_types.json>","..."],
+            "min_size": " type:int in MegaBytes:  <Minimum File Size (Matches all files >= min_size)>"
+        }
     }
 }
 ```
