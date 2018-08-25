@@ -1,0 +1,32 @@
+{
+  "Categories":
+   {
+      "Images": ".jpg,.jpeg,.png,.gif,.svg",
+      "Videos": ".mp4,.ogg,.3gp,.mkv,.avi,.webm",
+      "Documents": ".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.pptm,.ods,.odp,.odt",
+      "Archives": ".zip,.tar.gz,.bz2,.7z,.rar,.jar",
+      "Music": ".mp3,.m4a",
+      "Software":".exe,.com,.msi,.deb,.rpm",
+      "Fonts": ".ttf,.woff",
+      "Scripts": ".rb,.py,.php,.js,.sh,.bash,.zsh,.cmd,.bat,.pl",
+      "Iso": ".img,.iso",
+      "Torrents": ".torrent",
+      "DataFiles":".xml,.json,.db,.sqlite"
+  },  
+  "Sizes":{
+      "Movies": {
+        "file_cats": ["Videos"],
+        "min_size": 300
+      },
+      "HD Images":{
+        "file_cats":["Images"],
+        "min_size":0.9
+      }
+  },
+  "FallBackDir":"Other",
+  "IgnoreFiles":[
+    "^desktop\\.ini$",
+    ".*\\.sys$",
+    ".*\\.item$"
+  ]
+}
