@@ -117,7 +117,7 @@ def move_files(category, file_name, dir_name):
         if not os.path.exists(curr_file_destination):
             shutil.move(full_file_path, curr_file_destination)
         else:
-            #  TODO To be delt by renaming the file to something similar
+            #  TODO To be handled by renaming the file to something similar
             raise IOError("File" + file_name + "Exists in the destination")
 
 
@@ -214,15 +214,15 @@ def main():
     if args.verbose:
         print("Scanning  " + base_dir)
     walk_through(base_dir, find_files, is_recursive=args.recursive)
+    if args.clean:
+        if args.verbose:
+            print("Scanning for Empty directories...")
+        walk_through(base_dir, clean_structure, is_recursive=args.recursive, run_always=True)
     if args.verbose:
         for cat, files in result.items():
             print("+" + cat)
             for file in files:
                 print("-" + file)
-    if args.clean:
-        if args.verbose:
-            print("Removing Empty directories...")
-        walk_through(base_dir, clean_structure, is_recursive=args.recursive, run_always=True)
 
 
 if __name__ == '__main__':
