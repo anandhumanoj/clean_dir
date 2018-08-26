@@ -121,7 +121,7 @@ def move_files(category, file_name, dir_name):
             raise IOError("File" + file_name + "Exists in the destination")
 
 
-def parse_file_types(config_file):
+def parse_config(config_file):
     def convert_to_regexp(y):
         return "(.*" + re.escape(y) + "$)"
 
@@ -201,7 +201,7 @@ def main():
     config_file = host_dir + "/config.json"
     if args.config != "":
         config_file = args.config
-    parse_file_types(config_file)
+    parse_config(config_file)
     if not args.all:
         globals()['exp_ignore_files'].insert(0, u"^\..*")
     if args.dir != "" and os.path.isdir(args.dir):
