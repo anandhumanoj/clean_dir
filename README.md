@@ -4,7 +4,7 @@
 
 Simple python script to Clean up your download Directory. Categorises Each file in a directory and is capable of working recursively in a directory
 
-##### Capablities
+##### Capabilities
 
 - Parsing external json files to categorise each file type
 - Categorise files based on their size (Minimum size currently)
@@ -40,8 +40,8 @@ Simple python script to Clean up your download Directory. Categorises Each file 
 ```json
 {
     "Categories":{
-        "<Folder Name>": "<File Type as comma seperated list>",
-        "Example" : ".type1,type2,tyep3"
+        "<Folder Name>": "<File Type in comma terminated list>",
+        "Example" : ".type1,type2,type3"
     },
     "Sizes":{
         "<Folder Name>": {
