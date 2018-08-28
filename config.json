@@ -26,7 +26,6 @@
   "FallBackDir":"Other",
   "IgnoreFiles":[
     "^desktop\\.ini$",
-    ".*\\.sys$",
-    ".*\\.item$"
+    ".*\\.sys$"
   ]
 }
