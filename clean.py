@@ -4,6 +4,7 @@ import re
 import shutil
 import argparse
 import json
+from random import Random
 
 """
 A simple program to clean up your download directory
@@ -12,7 +13,8 @@ Github https://github.com/anandhumanoj
 #HAPPYCODING
 
 """
-#  TODO: add intelligent match for related files and folders
+#  TODO :POSTPONED: add intelligent match for related files and folders
+#  TODO : Add additional configuration for advanced topic based categorisation in inner directories
 
 file_types = {}
 file_types_un_formatted = {}
@@ -113,13 +115,12 @@ def move_files(category, file_name, dir_name):
     curr_file_destination = full_dir + "/" + file_name
     if not os.path.isdir(full_dir):
         os.mkdir(full_dir)
-    if not os.path.isfile(curr_file_destination):
-        if not os.path.exists(curr_file_destination):
-            shutil.move(full_file_path, curr_file_destination)
-        else:
-            #  TODO To be handled by renaming the file to something similar
-            raise IOError("File" + file_name + "Exists in the destination")
-
+    if (curr_file_destination != full_file_path):
+        if os.path.exists(curr_file_destination):
+            rand = Random()
+            file_name = "(" + str(rand.randint(0, 9)) + ") - " + file_name
+            curr_file_destination = full_dir + "/" + file_name
+        shutil.move(full_file_path, curr_file_destination)
 
 def parse_config(config_file):
     def convert_to_regexp(y):
@@ -177,7 +178,7 @@ def arg_parse():
     return parser.parse_args()
 
 
-def clean_structure(item_name, path):
+def clean_empty_dir(item_name, path):
     dir_item = path + "/" + item_name
     try:
         if os.path.isdir(dir_item):
@@ -217,12 +218,16 @@ def main():
     if args.clean:
         if args.verbose:
             print("Scanning for Empty directories...")
-        walk_through(base_dir, clean_structure, is_recursive=args.recursive, run_always=True)
+        walk_through(base_dir, clean_empty_dir, is_recursive=args.recursive, run_always=True)
     if args.verbose:
+        file_count = 0
         for cat, files in result.items():
             print("+" + cat)
             for file in files:
                 print("-" + file)
+                file_count = file_count + 1
+        print("--------------")
+        print(str(file_count) + " files moved ")
 
 
 if __name__ == '__main__':
