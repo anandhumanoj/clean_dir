@@ -51,7 +51,8 @@ Simple python script to Clean up your download Directory. Categorises Each file 
     },
     "FallbackDir":"Directory to put unknown files",
     "IgnoreFiles":[
-      "<Regular expressions to find file>"
+      "<RegExp to mark a file ignored>",
+      "..."
     ]
 }
 ```
