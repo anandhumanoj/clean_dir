@@ -210,6 +210,9 @@ def main():
 		globals()['base_dir'] = args.dir
 	elif args.default:
 		globals()['base_dir'] = os.path.expanduser("~") + "/Downloads"
+	elif args.dir="":
+		print("Please choose a directory to start scanning (use -d or --dir option to choose one. See help for more info)")
+		exit(1)
 	else:
 		print(args.dir + " is not a directory. Exiting...")
 		exit(1)
